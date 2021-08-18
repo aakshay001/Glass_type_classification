@@ -197,5 +197,5 @@ if classifier=="Logistic Regression":
     st.write("The Type of glass predicted is:", glass_type)
     st.write("Accuracy", accuracy.round(2))
     plot_confusion_matrix(lr, X_test, y_test)
-    st.pyplot())
+    st.pyplot()
 
