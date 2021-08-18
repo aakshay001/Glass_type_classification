@@ -184,16 +184,18 @@ if classifier == "Random Forest Classifier":
     plot_confusion_matrix(rfc,X_test,y_test)
     st.pyplot() 
 
-if classifier == "Logistic Regression":
-    if st.sidebar.button("Classify"):
-        st.subheader("Logistic Regression")
-        log_reg = LogisticRegression()
-        log_reg.fit(X_train,y_train)
-        y_pred = log_reg.predict(X_test)
-        score = log_reg.score(X_train,y_train)
-        glass_type = prediction(log_reg,ri,na,mg,al,si,k,ca,ba,fe)
-        st.write("The Type of glass predict is: ",glass_type)
-        st.write("Accuracy: ",score.round(2))
-        plot_confusion_matrix(log_reg,X_test,y_test)
-        st.pyplot() 
+if classifier=="Logistic Regression":
+  st.sidebar.subheader("Model Hyperparameter")
+  c_value = st.sidebar.number_input("C(Error Rate)",1,100,step = 1)
+  max_iter = st.sidebar.number_input("Maximum Iterrations",10,1000,step = 10)
+  if st.sidebar.button("Classify"):
+    st.subheader("Logistic Regression")
+    lr = LogisticRegression(c_value = c_value,max_iter = max_iter)
+    lr.fit(X_train,y_train)
+    score = lr.score(X_test,y_test)
+    glass_type = prediction(lr,ri, na, mg, al, si, k, ca, ba, fe)
+    st.write("The Type of glass predicted is:", glass_type)
+    st.write("Accuracy", accuracy.round(2))
+    plot_confusion_matrix(lr, X_test, y_test)
+    st.pyplot())
 
