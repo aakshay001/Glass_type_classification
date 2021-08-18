@@ -190,12 +190,12 @@ if classifier=="Logistic Regression":
   max_iter = st.sidebar.number_input("Maximum Iterrations",10,1000,step = 10)
   if st.sidebar.button("Classify"):
     st.subheader("Logistic Regression")
-    lr = LogisticRegression(c_value = c_value,max_iter = max_iter)
+    lr = LogisticRegression(C = c_value,max_iter = max_iter)
     lr.fit(X_train,y_train)
     score = lr.score(X_test,y_test)
     glass_type = prediction(lr,ri, na, mg, al, si, k, ca, ba, fe)
     st.write("The Type of glass predicted is:", glass_type)
-    st.write("Accuracy", accuracy.round(2))
+    st.write("Accuracy", score.round(2))
     plot_confusion_matrix(lr, X_test, y_test)
     st.pyplot()
 
